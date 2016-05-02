@@ -1,6 +1,8 @@
 FROM project42/ruby-alpine:latest
 MAINTAINER Jordan Clark jordan.clark@esu10.org
 
+COPY container-files /                                                                                                                                                        
+
 RUN apk add --no-cache ruby-json && \
 cd /usr/local && \
 wget https://gobuilder.me/get/github.com/coreos/etcd/etcdctl/etcdctl_master_linux-amd64.zip && \
@@ -14,5 +16,5 @@ rm master.zip && \
 cd etcd-glueops && \
 bundle install
 
-ENV COMMAND 'ruby -v'
+ENTRYPOINT ["/config/bootstrap.sh"]
 
